@@ -38,6 +38,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Hat[] $hats
+ * @property-read int|null $hats_count
  */
 class User extends Authenticatable
 {
@@ -79,5 +81,11 @@ class User extends Authenticatable
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'author_id');
+    }
+
+
+    public function hats(): HasMany
+    {
+        return $this->hasMany(Hat::class);
     }
 }

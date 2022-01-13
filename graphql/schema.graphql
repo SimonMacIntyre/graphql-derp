@@ -11,6 +11,13 @@ type Query {
     post(id: Int! @eq): Post @find
 }
 
+type Mutation {
+    createUser(name: String!, email: String!, password: String!): User! @create
+    updateUser(id: ID!, name: String, email: String): User @update
+    upsertUser(id: ID!, name: String!, email: String): User @upsert
+    deleteUser(id: ID!): User @delete
+}
+
 type User {
     id: ID!
     name: String!
@@ -18,6 +25,7 @@ type User {
     created_at: DateTime!
     updated_at: DateTime!
     posts: [Post!]! @hasMany
+    hats: [Hat!]! @hasMany
 }
 
 type Post {
@@ -32,4 +40,9 @@ type Comment {
     id: ID!
     reply: String!
     post: Post! @belongsTo
+}
+
+type Hat {
+    id: ID!
+    name: String!
 }
